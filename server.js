@@ -16,6 +16,11 @@ const rappers = {
 		birthName: 'Chancelor Bennett',
 		birthLocation: 'Chicago, IL',
 	},
+	unknown: {
+		age: 0,
+		birthName: 'unknown',
+		birthLocation: 'unknown',
+	},
 };
 
 // Send File
@@ -32,11 +37,7 @@ app.get('/api/:name', (req, res) => {
 	if (rappers[name]) {
 		res.json(rappers[name]);
 	} else {
-		res.json({
-			age: 0,
-			birthName: 'unknown',
-			birthLocation: 'unknown',
-		});
+		res.json(rappers['unknown']);
 	}
 });
 
