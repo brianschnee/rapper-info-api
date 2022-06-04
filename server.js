@@ -1,4 +1,3 @@
-const { request } = require('express');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -10,17 +9,17 @@ const rappers = {
 	'21 savage': {
 		age: 29,
 		birthName: 'Shéyaa Bin Abraham-Joseph',
-		birthLocation: 'London, UK',
+		birthLocation: 'London, England',
 	},
 	'chance the rapper': {
 		age: 29,
 		birthName: 'Chancelor Bennett',
 		birthLocation: 'Chicago, IL',
 	},
-	dylan: {
-		age: '29',
-		birthName: 'Dylan',
-		birthLocation: 'Dylan',
+	unknown: {
+		age: 0,
+		birthName: 'unknown',
+		birthLocation: 'unknown',
 	},
 };
 
@@ -30,21 +29,21 @@ app.get('/', (req, res) => {
 });
 
 // Send JSON
-app.get('/api/:rapperName', (req, res) => {
-	let { rapperName } = req.params;
-	rapperName = rapperName.toLowerCase();
+app.get('/api/:name', (req, res) => {
+	let { name } = req.params;
+	name = name.toLowerCase();
 
 	// [] notation incase of spaces in prop name
-	if (rappers[rapperName]) {
-		res.json(rappers[rapperName]);
+	if (rappers[name]) {
+		res.json(rappers[name]);
 	} else {
-		res.json(rappers['dylan']);
+		res.json(rappers['unknown']);
 	}
 });
 
 // Listen on PORT
-app.listen(process.env.PORT || PORT, () =>
+app.listen(process.env.PORT || PORT, () => {
 	console.log(
 		`\x1b[1m\x1b[32mThe server is running on port ${PORT}! You better go catch it!`,
-	),
-);
+	);
+});
